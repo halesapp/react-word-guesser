@@ -1,9 +1,9 @@
 .wbr {
     display: flex;
-    height: 65px;
+    height: 60px;
     align-items: center;
     justify-content: center;
-    margin: 5px 0;
+    margin: 8px 0;
 }
 .wb {
     font-size: 30pt;
@@ -13,8 +13,9 @@
     backdrop-filter: blur(6px);
     background: white;
     opacity: 75%;
-    margin: 3px;
+    margin: 3px 6px;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 1s linear;
 }

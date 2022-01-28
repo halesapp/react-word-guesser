@@ -1,10 +1,14 @@
 .App {
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     top: 0;
     left: 0;
     width: 100%;
+    min-width: 400px;
     height: 100%;
+    min-height: 700px;
     background: #40464d;
-    display: flex;
-    flex-direction: column;
 }
