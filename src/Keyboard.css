@@ -1,0 +1,28 @@
+.kb {
+    width: 100%;
+}
+
+.kbr {
+    display: flex;
+    justify-content: center;
+}
+
+.key {
+    font-size: 20pt;
+    margin: 3px;
+    padding: 3px 2px;
+    border: 1px solid black;
+    width: 1.5ch;
+    height: 1.25em;
+    text-align: center;
+}
+
+.bg-y {
+    background: #dcdc00 !important;
+}
+.bg-g {
+    background: green !important;
+}
+.bg-b {
+    background: lightgray !important;
+}

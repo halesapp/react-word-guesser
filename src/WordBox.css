@@ -1,0 +1,20 @@
+.wbr {
+    display: flex;
+    height: 65px;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 0;
+}
+.wb {
+    font-size: 30pt;
+    height: 100%;
+    width: 40px;
+    border: 1px solid white;
+    backdrop-filter: blur(6px);
+    background: white;
+    opacity: 75%;
+    margin: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
