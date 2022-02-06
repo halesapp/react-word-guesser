@@ -12,3 +12,8 @@
     min-height: 700px;
     background: #40464d;
 }
+
+h1 {
+    margin: 10px auto;
+    color: white;
+}

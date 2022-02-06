@@ -7,23 +7,31 @@ import WordBox from "./WordBox";
 
 const App = () => {
     const secretWord = "MOUTH"
-
+    const allLeters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+    let letterState = {}
+    allLeters.forEach(a => letterState[a] = "noguess")
     // const a1z26 = (letter = null, num = null) => {
     //     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     //     if (letter !== null) return String(alphabet.indexOf(letter) + 1)
     //     if (num !== null) return alphabet[num]
     // }
 
-    const [guess, setGuess] = useState({
-          1: Array(secretWord.length).fill(""),
-          2: Array(secretWord.length).fill(""),
-          3: Array(secretWord.length).fill(""),
-          4: Array(secretWord.length).fill(""),
-          5: Array(secretWord.length).fill(""),
-      })
+    const numGuesses = 6
+    const [guess, setGuess] = useState(Array(numGuesses).fill(Array(secretWord.length).fill("")))
+    const [guessedLetters, setGuessedLetters] = useState(letterState)
     const [showSolution, setShowSolution] = useState(Array(5).fill(false))
-    const [num, setNum] = useState(1)
+    const [num, setNum] = useState(0)
 
+    const checkValidGuess = (guess) => {
+        return guess.every(a => a !== "")
+    }
+    const checkGuess = (guess) => {
+        return guess.map((letter, idx) => {
+            if (secretWord[idx] === letter) return 'correct'
+            else if (secretWord.indexOf(letter) + 1) return 'pos'
+            else return 'wrong'
+        })
+    }
     const click = (a, b) => {
         setGuess(currentGuess => {
             let newGuess = JSON.parse(JSON.stringify(currentGuess))
@@ -44,9 +52,25 @@ const App = () => {
     }
     const submit = () => {
         setNum(currentNum => {
+            if (!checkValidGuess(guess[currentNum])) return currentNum
+
+            setGuessedLetters(currentGuess => {
+                let newGuess = JSON.parse(JSON.stringify(currentGuess))
+                guess[currentNum].forEach((letter, idx) => {
+                    if (secretWord[idx] === letter) {
+                        newGuess[letter] = 'correct'
+                    } else if (secretWord.indexOf(letter) + 1) {
+                        newGuess[letter] = secretWord[letter] === 'correct' ? 'correct' : 'pos'
+                    } else {
+                        newGuess[letter] = 'wrong'
+                    }
+                })
+                return newGuess
+            })
+
             setShowSolution(current => {
                 let newSolution = [...current]
-                newSolution[currentNum - 1] = true
+                newSolution[currentNum] = true
                 return newSolution
             })
             return currentNum + 1
@@ -56,12 +80,9 @@ const App = () => {
     return (
       <div className={"App"}>
           <h1>Wordle</h1>
-          <WordBox word={secretWord} guess={guess["1"]} solve={showSolution[0]}/>
-          <WordBox word={secretWord} guess={guess["2"]} solve={showSolution[1]}/>
-          <WordBox word={secretWord} guess={guess["3"]} solve={showSolution[2]}/>
-          <WordBox word={secretWord} guess={guess["4"]} solve={showSolution[3]}/>
-          <WordBox word={secretWord} guess={guess["5"]} solve={showSolution[4]}/>
-          <Keyboard click={click} del={del} submit={submit} num={num}/>
+          {[...Array(numGuesses).keys()]
+            .map(number => <WordBox key={number} word={secretWord} guess={guess[number]} solve={showSolution[number]} checkGuess={checkGuess}/>)}
+          <Keyboard click={click} del={del} submit={submit} num={num} guessedLetters={guessedLetters}/>
       </div>
     )
 }

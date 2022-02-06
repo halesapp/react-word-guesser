@@ -17,19 +17,22 @@
     height: 1.25em;
     text-align: center;
     user-select: none;
-    background: lightgray;
 }
 
 .key-wide {
     width: auto;
 }
 
-.wb.bg-y, .key.bg-y {
+
+.wb.noguess, .key.noguess {
+    background: lightgray;
+}
+.wb.pos, .key.pos {
     background: #dcdc00;
 }
-.wb.bg-g, .key.bg-g {
+.wb.correct, .key.correct {
     background: #23ce23;
 }
-.wb.bg-b, .key.bg-b {
+.wb.wrong, .key.wrong {
     background: #6e6e6e;
 }
